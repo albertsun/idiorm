@@ -21,6 +21,7 @@ Features
 * Requires no model classes, no XML configuration and no code generation: works out of the box, given only a connection string.
 * Consists of just one class called `ORM`. Minimal global namespace pollution.
 * Database agnostic. Currently supports SQLite and MySQL. May support others, please give it a try!
+* albertsun fork: Added a `SQL_CALC_FOUND_ROWS` method to add that clause to a query. MySQL only.
 
 Changelog
 ---------
