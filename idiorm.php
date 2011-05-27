@@ -103,6 +103,9 @@
         // Should the query include a DISTINCT keyword?
         protected $_distinct = false;
 
+        // Should the query include a SQL_CALC_FOUND_ROWS keyword?
+        protected $_SQL_CALC_FOUND_ROWS = false;
+
         // Is this a raw query?
         protected $_is_raw_query = false;
 
@@ -479,6 +482,14 @@
         }
 
         /**
+         * Add a SQL_CALC_FOUND_ROWS keyword before the list of columns in the SELECT query
+         */
+        public function SQL_CALC_FOUND_ROWS() {
+            $this->_SQL_CALC_FOUND_ROWS = true;
+            return $this;
+        }
+
+        /**
          * Internal method to add a JOIN source to the query.
          *
          * The join_operator should be one of INNER, LEFT OUTER, CROSS etc - this
@@ -791,6 +802,11 @@
             if ($this->_distinct) {
                 $result_columns = 'DISTINCT ' . $result_columns;
             }
+
+            if ($this->_SQL_CALC_FOUND_ROWS) {
+                $result_columns = 'SQL_CALC_FOUND_ROWS ' . $result_columns;
+            }
+
 
             $fragment = "SELECT {$result_columns} FROM " . $this->_quote_identifier($this->_table_name);
 
